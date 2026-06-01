@@ -1,12 +1,126 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja-JP">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voton Closs - ログイン</title>
+    
+    <meta name="robots" content="noindex, nofollow">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --bg-main: #1e1f22;
+            --bg-card: #2b2d31;
+            --bg-input: #1e1f22;
+            --text-main: #dbdee1;
+            --text-muted: #949ba4;
+            --accent: #5865f2;
+            --accent-hover: #4752c4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* カード全体のコンテナ */
+        .auth-container {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s;
+        }
+
+        /* タイトルと説明文 */
+        h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; color: #fff; text-align: center; }
+        p.subtitle { font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
+
+        /* フォーム要素 */
+        .form-group { margin-bottom: 20px; position: relative; }
+        label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: var(--text-muted); letter-spacing: 0.5px; }
+        input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid transparent;
+            padding: 12px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.2);
+        }
+
+        /* ボタン */
+        button.submit-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+        button.submit-btn:hover { background: var(--accent-hover); }
+        button.submit-btn:active { transform: scale(0.98); }
+
+        /* 切り替えリンクエリア */
+        .switch-area {
+            margin-top: 24px;
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        .switch-btn {
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        .switch-btn:hover { text-decoration: underline; }
+
+        /* シームレスな画面切り替えアニメーション用のクラス */
+        .fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .fade-in {
+            animation: slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-    <h1>Voton Chat</h1>
-    
+
+<div class="auth-container" id="auth-card">
+    <div id="auth-content"></div>
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
